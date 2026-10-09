@@ -1,0 +1,110 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "allow_rename": 1,
+ "creation": "2026-07-31 23:48:47.888744",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "site_title_template",
+  "default_meta_description",
+  "default_og_image",
+  "google_search_console_id",
+  "google_analytics_id",
+  "meta_pixel_id",
+  "robots_txt_content",
+  "org_name",
+  "org_logo",
+  "social_profile_urls"
+ ],
+ "fields": [
+  {
+   "fieldname": "site_title_template",
+   "fieldtype": "Data",
+   "label": "Site Title Template"
+  },
+  {
+   "fieldname": "default_meta_description",
+   "fieldtype": "Text",
+   "label": "Default Meta Description"
+  },
+  {
+   "fieldname": "default_og_image",
+   "fieldtype": "Attach Image",
+   "label": "Default OG Image"
+  },
+  {
+   "fieldname": "google_search_console_id",
+   "fieldtype": "Data",
+   "label": "Google Search Console ID"
+  },
+  {
+   "fieldname": "google_analytics_id",
+   "fieldtype": "Data",
+   "label": "Google Analytics ID"
+  },
+  {
+   "fieldname": "meta_pixel_id",
+   "fieldtype": "Data",
+   "label": "Meta Pixel ID"
+  },
+  {
+   "fieldname": "robots_txt_content",
+   "fieldtype": "Code",
+   "label": "Robots.txt Content",
+   "options": "Text"
+  },
+  {
+   "fieldname": "org_name",
+   "fieldtype": "Data",
+   "label": "Organization Name"
+  },
+  {
+   "fieldname": "org_logo",
+   "fieldtype": "Attach Image",
+   "label": "Organization Logo"
+  },
+  {
+   "fieldname": "social_profile_urls",
+   "fieldtype": "Text",
+   "label": "Social Profile URLs (one per line)"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-07-31 23:48:47.888744",
+ "modified_by": "Administrator",
+ "module": "Coscore",
+ "name": "Coscore SEO Setting",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Coscore Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

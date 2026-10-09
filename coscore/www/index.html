@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% if seo.site_title_template %}{{ seo.site_title_template|replace('{title}', 'Home') }}{% else %}Home{% endif %}</title>
+    {% if seo.default_meta_description %}<meta name="description" content="{{ seo.default_meta_description }}" />{% endif %}
+    {% if seo.default_og_image %}<meta property="og:image" content="{{ seo.default_og_image }}" />{% endif %}
+    <!-- Open Graph tags -->
+    <meta property="og:title" content="{{ seo.site_title_template|replace('{title}', 'Home') }}" />
+    <meta property="og:description" content="{{ seo.default_meta_description }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ frappe.utils.get_url('/') }}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="{{ frappe.utils.get_url('/') }}" />
+    <link rel="stylesheet" href="/assets/coscore/css/style.css" />
+</head>
+<body>
+    <!-- Homepage Banners -->
+    {% for banner in banners %}
+    <section class="homepage-banner" style="order: {{ banner.sort_order }};">
+        <img src="{{ banner.image }}" alt="{{ banner.title|e }}" loading="lazy" />
+        <div class="banner-content">
+            <h1>{{ banner.title }}</h1>
+            {% if banner.subtitle %}<p>{{ banner.subtitle }}</p>{% endif %}
+            {% if banner.cta_link %}<a href="{{ banner.cta_link }}" class="cta-button">Learn More</a>{% endif %}
+        </div>
+    </section>
+    {% endfor %}
+
+    <!-- Dynamic Sections -->
+    {% for sec in sections %}
+        {% if sec.section_type == "Featured Products" %}
+            <section class="featured-products" style="order: {{ sec.sort_order }};">
+                <h2>Featured Products</h2>
+                <div class="product-grid">
+                    {% set featured = frappe.get_all('Coscore Product', filters={'is_featured': 1, 'is_active': 1}, fields=['name','title','slug','price','discount_price','stock_status']) %}
+                    {% for prod in featured %}
+                    <div class="product-card">
+                        <a href="/product/{{ prod.slug }}"><img src="{{ prod.title }}" alt="{{ prod.title }}" loading="lazy" /></a>
+                        <h3><a href="/product/{{ prod.slug }}">{{ prod.title }}</a></h3>
+                        <p class="price">{{ prod.price }}{% if prod.discount_price %} <span class="discount">{{ prod.discount_price }}</span>{% endif %}</p>
+                        <p class="stock {{ prod.stock_status|lower|replace(' ', '-') }}">{{ prod.stock_status }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+        {% elif sec.section_type == "Category Grid" %}
+            <section class="category-grid" style="order: {{ sec.sort_order }};">
+                <h2>Shop by Category</h2>
+                <div class="category-grid-wrapper">
+                    {% set cats = frappe.get_all('Coscore Product Category', filters={'is_active': 1}, fields=['name','category_name','slug','banner_image']) %}
+                    {% for cat in cats %}
+                    {% set cat_label = (cat.category_name or cat.name or '')|lower|trim %}
+                    {% set cat_slug = (cat.slug or '')|lower|trim %}
+                    {% if cat_label not in ['service', 'services'] and 'service' not in cat_label and cat_slug not in ['service', 'services'] %}
+                    <div class="category-card">
+                        <a href="/shop/{{ cat.slug }}"><img src="{{ cat.banner_image or '/assets/coscore/logo.png' }}" alt="{{ cat.category_name }}" loading="lazy" /></a>
+                        <h3><a href="/shop/{{ cat.slug }}">{{ cat.category_name }}</a></h3>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </section>
+        {% elif sec.section_type == "Banner" %}
+            <section class="custom-banner" style="order: {{ sec.sort_order }};">
+                {{ sec.custom_html|safe }}
+            </section>
+        {% elif sec.section_type == "Custom HTML" %}
+            <section class="custom-html" style="order: {{ sec.sort_order }};">
+                {{ sec.custom_html|safe }}
+            </section>
+        {% endif %}
+    {% endfor %}
+
+    <!-- Footer (unchanged) -->
+    {% include "templates/footer.html" %}
+</body>
+</html>

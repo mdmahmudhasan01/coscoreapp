@@ -1,0 +1,13 @@
+[
+  {
+    "doctype": "Coscore Payment Gateway Setting",
+    "name": "Paystack",
+    "gateway_name": "Paystack",
+    "mode": "Sandbox",
+    "api_key": "YOUR_PUBLIC_KEY",
+    "api_secret": "YOUR_SECRET_KEY",
+    "is_active": 1,
+    "is_default": 1,
+    "description": "Paystack payment gateway integration placeholder. Replace keys with real credentials."
+  }
+]

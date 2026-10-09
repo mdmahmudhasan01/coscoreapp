@@ -1,0 +1,19 @@
+{
+  "doctype": "DocType",
+  "name": "Coscore Ad Tracking Event",
+  "module": "coscore",
+  "custom": 0,
+  "istable": 0,
+  "fields": [
+    {"fieldname": "event_name", "label": "Event Name", "fieldtype": "Select", "options": "PageView\nViewContent\nAddToCart\nPurchase\nLead\nInitiateCheckout\nContact", "reqd": 1},
+    {"fieldname": "source", "label": "Source", "fieldtype": "Select", "options": "Meta\nGA4\nCloudflare", "reqd": 1},
+    {"fieldname": "payload", "label": "Payload", "fieldtype": "JSON"},
+    {"fieldname": "sent_status", "label": "Sent Status", "fieldtype": "Select", "options": "Pending\nSent\nFailed", "default": "Pending"},
+    {"fieldname": "response_log", "label": "Response Log", "fieldtype": "Text"},
+    {"fieldname": "created_at", "label": "Created At", "fieldtype": "Datetime", "default": "Now"}
+  ],
+  "permissions": [
+    {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1},
+    {"role": "Coscore Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1}
+  ]
+}

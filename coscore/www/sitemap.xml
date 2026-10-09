@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <urlset>
+    {% for u in urls %}
+    <url>
+      <loc>{{ u }}</loc>
+      <lastmod>{{ frappe.utils.nowdate() }}</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.8</priority>
+    </url>
+    {% endfor %}
+  </urlset>
+</html>

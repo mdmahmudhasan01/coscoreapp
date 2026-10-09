@@ -1,0 +1,19 @@
+{
+  "doctype": "DocType",
+  "name": "Coscore Order Tracking",
+  "module": "coscore",
+  "custom": 0,
+  "istable": 0,
+  "fields": [
+    {"fieldname": "sales_invoice", "label": "Sales Invoice", "fieldtype": "Link", "options": "Sales Invoice", "reqd": 1},
+    {"fieldname": "courier_name", "label": "Courier Name", "fieldtype": "Data", "reqd": 1},
+    {"fieldname": "consignment_id", "label": "Consignment ID", "fieldtype": "Data"},
+    {"fieldname": "tracking_status", "label": "Tracking Status", "fieldtype": "Data"},
+    {"fieldname": "status_history", "label": "Status History", "fieldtype": "Table", "options": "Coscore Order Tracking History"},
+    {"fieldname": "last_synced_at", "label": "Last Synced At", "fieldtype": "Datetime"}
+  ],
+  "permissions": [
+    {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1},
+    {"role": "Coscore Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1}
+  ]
+}

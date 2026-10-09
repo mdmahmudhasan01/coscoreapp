@@ -1,0 +1,19 @@
+{
+  "doctype": "DocType",
+  "name": "Coscore Shipping Rule",
+  "module": "coscore",
+  "custom": 0,
+  "istable": 0,
+  "fields": [
+    {"fieldname": "thana", "label": "Thana", "fieldtype": "Link", "options": "Coscore Thana"},
+    {"fieldname": "zone_type", "label": "Zone Type", "fieldtype": "Select", "options": "Dhaka Metro\nOutside Dhaka\nSub-Metro"},
+    {"fieldname": "base_charge", "label": "Base Charge", "fieldtype": "Currency"},
+    {"fieldname": "weight_charge_slab", "label": "Weight Charge Slab", "fieldtype": "Table", "options": "Coscore Shipping Charge Slab"},
+    {"fieldname": "cod_extra_charge", "label": "COD Extra Charge", "fieldtype": "Currency"},
+    {"fieldname": "is_active", "label": "Active", "fieldtype": "Check", "default": 1}
+  ],
+  "permissions": [
+    {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1},
+    {"role": "Coscore Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1}
+  ]
+}

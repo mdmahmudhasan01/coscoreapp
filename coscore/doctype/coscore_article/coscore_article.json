@@ -1,0 +1,32 @@
+{
+  "doctype": "DocType",
+  "name": "Coscore Article",
+  "module": "coscore",
+  "custom": 0,
+  "istable": 0,
+  "autoname": "field:slug",
+  "title_field": "title",
+  "fields": [
+    {"fieldname": "title", "label": "Title", "fieldtype": "Data", "reqd": 1, "in_list_view": 1},
+    {"fieldname": "slug", "label": "URL Slug", "fieldtype": "Data", "reqd": 1, "unique": 1, "description": "e.g. korean-skincare-routine (no spaces, lowercase)"},
+    {"fieldname": "category", "label": "Category", "fieldtype": "Select", "options": "Routine\nGuide\nIngredients\nTrends\nSkincare\nMakeup\nHair Care\nK-Beauty", "in_list_view": 1},
+    {"fieldname": "cover_image", "label": "Cover Image", "fieldtype": "Attach Image"},
+    {"fieldname": "excerpt", "label": "Excerpt", "fieldtype": "Small Text", "description": "Short summary shown on the homepage card (150-160 chars for SEO)"},
+    {"fieldname": "content", "label": "Article Content", "fieldtype": "Text Editor"},
+    {"fieldname": "author", "label": "Author", "fieldtype": "Data"},
+    {"fieldname": "published_on", "label": "Published On", "fieldtype": "Date", "in_list_view": 1},
+    {"fieldname": "is_published", "label": "Published", "fieldtype": "Check", "default": 1, "in_list_view": 1},
+    {"fieldname": "section_break_seo", "label": "SEO", "fieldtype": "Section Break"},
+    {"fieldname": "meta_title", "label": "Meta Title", "fieldtype": "Data", "description": "60 chars max for Google"},
+    {"fieldname": "meta_description", "label": "Meta Description", "fieldtype": "Small Text", "description": "150-160 chars for Google AdSense"},
+    {"fieldname": "meta_keywords", "label": "Meta Keywords", "fieldtype": "Data"},
+    {"fieldname": "og_image", "label": "OG Image (Social Share)", "fieldtype": "Attach Image"}
+  ],
+  "permissions": [
+    {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1},
+    {"role": "Coscore Manager", "read": 1, "write": 1, "create": 1, "delete": 1},
+    {"role": "Guest", "read": 1}
+  ],
+  "sort_field": "published_on",
+  "sort_order": "DESC"
+}

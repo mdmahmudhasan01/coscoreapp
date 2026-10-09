@@ -1,0 +1,100 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "allow_rename": 1,
+ "autoname": "autoincrement",
+ "creation": "2026-08-21 05:55:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "full_name",
+  "email",
+  "phone",
+  "job_title",
+  "experience",
+  "status",
+  "resume_url",
+  "cover_letter"
+ ],
+ "fields": [
+  {
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Full Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Email",
+   "reqd": 1
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Phone",
+   "reqd": 1
+  },
+  {
+   "fieldname": "job_title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Job Position",
+   "default": "Digital Marketer"
+  },
+  {
+   "fieldname": "experience",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Experience"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "New\nShortlisted\nInterview Scheduled\nHired\nRejected",
+   "default": "New"
+  },
+  {
+   "fieldname": "resume_url",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Resume / CV Link",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cover_letter",
+   "fieldtype": "Small Text",
+   "label": "Cover Letter / Notes"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-08-21 05:55:00.000000",
+ "modified_by": "Administrator",
+ "module": "Coscore",
+ "name": "Coscore Job Applicant",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

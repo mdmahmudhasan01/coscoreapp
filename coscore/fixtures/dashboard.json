@@ -1,0 +1,33 @@
+[
+ {
+  "cards": [
+   {
+    "card": "Today's Revenue"
+   },
+   {
+    "card": "Today's Orders"
+   },
+   {
+    "card": "Active Products"
+   },
+   {
+    "card": "Pending Shipments"
+   }
+  ],
+  "chart_options": null,
+  "charts": [
+   {
+    "chart": "Coscore Orders by Status",
+    "width": "Full"
+   }
+  ],
+  "dashboard_name": "Coscore Store Analytics",
+  "docstatus": 0,
+  "doctype": "Dashboard",
+  "is_default": 0,
+  "is_standard": 0,
+  "modified": "2026-08-01 00:29:55.418229",
+  "module": "Coscore",
+  "name": "Coscore Store Analytics"
+ }
+]

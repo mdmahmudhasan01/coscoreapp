@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if product.seo_title %}{{ product.seo_title }}{% elif seo.site_title_template %}{{ seo.site_title_template|replace('{title}', product.title) }}{% else %}{{ product.title }} | Lookzene{% endif %}</title>
+    {% if product.seo_description %}
+    <meta name="description" content="{{ product.seo_description }}" />
+    {% elif seo.default_meta_description %}
+    <meta name="description" content="{{ seo.default_meta_description }}" />
+    {% endif %}
+    <!-- Open Graph -->
+    <meta property="og:title" content="{{ product.seo_title or product.title }}" />
+    <meta property="og:description" content="{{ product.seo_description or product.short_description or '' }}" />
+    <meta property="og:type" content="product" />
+    <meta property="og:url" content="{{ frappe.utils.get_url('/product/' ~ product.slug) }}" />
+    {% if images %}
+    <meta property="og:image" content="{{ images[0].image }}" />
+    {% endif %}
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="{{ frappe.utils.get_url('/product/' ~ product.slug) }}" />
+    <link rel="stylesheet" href="/assets/coscore/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fafafa;
+            color: #1a1a2e;
+        }
+
+        /* ─── Breadcrumb ─── */
+        .breadcrumb {
+            max-width: 1200px;
+            margin: 1.5rem auto 0;
+            padding: 0 1.5rem;
+            font-size: .85rem;
+            color: #888;
+        }
+        .breadcrumb a { color: #e05c9a; text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb span { margin: 0 .4rem; }
+
+        /* ─── Product Layout ─── */
+        .product-page {
+            max-width: 1200px;
+            margin: 1.5rem auto 4rem;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        @media (max-width: 768px) {
+            .product-page { grid-template-columns: 1fr; gap: 1.5rem; }
+        }
+
+        /* ─── Gallery ─── */
+        .gallery { position: sticky; top: 1.5rem; }
+        .gallery-main {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 4px 24px rgba(0,0,0,.08);
+            margin-bottom: 1rem;
+        }
+        .gallery-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .4s ease;
+        }
+        .gallery-main img:hover { transform: scale(1.04); }
+
+        .gallery-thumbs {
+            display: flex;
+            gap: .6rem;
+            flex-wrap: wrap;
+        }
+        .gallery-thumbs img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color .2s, transform .2s;
+        }
+        .gallery-thumbs img.active,
+        .gallery-thumbs img:hover {
+            border-color: #e05c9a;
+            transform: scale(1.05);
+        }
+
+        /* ─── Product Info ─── */
+        .product-info {}
+        .product-badge {
+            display: inline-block;
+            padding: .3rem .8rem;
+            border-radius: 20px;
+            font-size: .75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .05em;
+            margin-bottom: 1rem;
+        }
+        .badge-in-stock  { background: #e8f5e9; color: #2e7d32; }
+        .badge-out-stock { background: #fce4ec; color: #c62828; }
+
+        .product-title {
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: .75rem;
+            color: #1a1a2e;
+        }
+        @media (max-width: 480px) { .product-title { font-size: 1.5rem; } }
+
+        .product-short-desc {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ─── Pricing ─── */
+        .pricing {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .price-current {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #e05c9a;
+        }
+        .price-original {
+            font-size: 1.2rem;
+            color: #aaa;
+            text-decoration: line-through;
+        }
+        .discount-badge {
+            background: linear-gradient(135deg, #ff6b6b, #e05c9a);
+            color: #fff;
+            padding: .3rem .7rem;
+            border-radius: 12px;
+            font-size: .8rem;
+            font-weight: 700;
+        }
+
+        /* ─── Add to Cart ─── */
+        .qty-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+        .qty-control {
+            display: flex;
+            align-items: center;
+            border: 2px solid #e8e8e8;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .qty-btn {
+            width: 40px;
+            height: 44px;
+            border: none;
+            background: #f5f5f5;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background .2s;
+        }
+        .qty-btn:hover { background: #fce4f0; color: #e05c9a; }
+        .qty-input {
+            width: 48px;
+            height: 44px;
+            border: none;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 600;
+            outline: none;
+        }
+
+        .btn-add-cart {
+            flex: 1;
+            height: 50px;
+            background: linear-gradient(135deg, #e05c9a, #c2185b);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform .2s, box-shadow .2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem;
+        }
+        .btn-add-cart:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(224,92,154,.35);
+        }
+        .btn-add-cart:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-buy-now {
+            width: 100%;
+            height: 50px;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform .2s, box-shadow .2s;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem;
+        }
+        .btn-buy-now:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(26,26,46,.3);
+        }
+        .btn-buy-now:disabled { background: #ccc; cursor: not-allowed; }
+
+        /* ─── Trust badges ─── */
+        .trust-badges {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            padding: 1rem 0;
+            border-top: 1px solid #f0f0f0;
+            border-bottom: 1px solid #f0f0f0;
+            margin-bottom: 1.5rem;
+        }
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+            font-size: .8rem;
+            color: #555;
+        }
+        .trust-icon { font-size: 1.1rem; }
+
+        /* ─── Description tabs ─── */
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #f0f0f0;
+            margin-bottom: 1.5rem;
+        }
+        .tab-btn {
+            padding: .7rem 1.2rem;
+            border: none;
+            background: none;
+            font-size: .95rem;
+            font-weight: 500;
+            cursor: pointer;
+            color: #888;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: color .2s, border-color .2s;
+        }
+        .tab-btn.active { color: #e05c9a; border-bottom-color: #e05c9a; }
+        .tab-panel { display: none; line-height: 1.7; color: #444; }
+        .tab-panel.active { display: block; }
+        .tab-panel ul { padding-left: 1.2rem; }
+        .tab-panel li { margin-bottom: .4rem; }
+
+        /* ─── Toast notification ─── */
+        #toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #1a1a2e;
+            color: #fff;
+            padding: .9rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 500;
+            font-size: .95rem;
+            box-shadow: 0 8px 24px rgba(0,0,0,.2);
+            transform: translateY(120%);
+            opacity: 0;
+            transition: all .35s cubic-bezier(.175,.885,.32,1.275);
+            z-index: 9999;
+        }
+        #toast.show { transform: translateY(0); opacity: 1; }
+        #toast.success { border-left: 4px solid #4caf50; }
+        #toast.error   { border-left: 4px solid #e05c9a; }
+
+        /* ─── Related Products ─── */
+        .related-section {
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+            padding: 0 1.5rem;
+        }
+        .related-section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1a1a2e;
+        }
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+        .related-card {
+            background: #fff;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,.06);
+            transition: transform .25s, box-shadow .25s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .related-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,.12);
+        }
+        .related-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .related-card-body { padding: 1rem; }
+        .related-card-title { font-weight: 600; font-size: .95rem; margin-bottom: .4rem; }
+        .related-card-price { color: #e05c9a; font-weight: 700; }
+        .related-card-price del { color: #aaa; font-weight: 400; font-size: .85rem; margin-left: .3rem; }
+    </style>
+</head>
+<body>
+    {% include "templates/header.html" %}
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="breadcrumb">
+        <a href="/">Home</a>
+        <span>›</span>
+        <a href="/shop">Shop</a>
+        {% if product.category %}
+        <span>›</span>
+        <a href="/shop/{{ product.category }}">{{ product.category }}</a>
+        {% endif %}
+        <span>›</span>
+        <span>{{ product.title }}</span>
+    </nav>
+
+    <!-- Main Product Section -->
+    <main class="product-page">
+
+        <!-- Gallery -->
+        <div class="gallery">
+            <div class="gallery-main" id="mainImgWrap">
+                {% if images %}
+                <img id="mainImg" src="{{ images[0].image }}" alt="{{ images[0].alt_text or product.title }}" loading="eager" />
+                {% else %}
+                <img id="mainImg" src="https://placehold.co/600x600?text=No+Image" alt="{{ product.title }}" />
+                {% endif %}
+            </div>
+            {% if images|length > 1 %}
+            <div class="gallery-thumbs" id="thumbs">
+                {% for img in images %}
+                <img src="{{ img.image }}"
+                     alt="{{ img.alt_text or product.title }}"
+                     loading="lazy"
+                     class="{% if loop.first %}active{% endif %}"
+                     onclick="switchImage(this, '{{ img.image }}', '{{ img.alt_text or product.title }}')" />
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Product Info -->
+        <div class="product-info">
+            <!-- Stock badge -->
+            <div>
+                {% if product.stock_status == 'In Stock' %}
+                <span class="product-badge badge-in-stock">✓ In Stock</span>
+                {% else %}
+                <span class="product-badge badge-out-stock">✗ Out of Stock</span>
+                {% endif %}
+            </div>
+
+            <h1 class="product-title">{{ product.title }}</h1>
+
+            {% if product.short_description %}
+            <p class="product-short-desc">{{ product.short_description }}</p>
+            {% endif %}
+
+            <!-- Pricing -->
+            <div class="pricing">
+                {% if product.discount_price and product.discount_price < product.price %}
+                <span class="price-current">৳{{ "{:,.0f}".format(product.discount_price) }}</span>
+                <span class="price-original">৳{{ "{:,.0f}".format(product.price) }}</span>
+                {% set discount_pct = ((product.price - product.discount_price) / product.price * 100) | round | int %}
+                <span class="discount-badge">{{ discount_pct }}% OFF</span>
+                {% else %}
+                <span class="price-current">৳{{ "{:,.0f}".format(product.price) }}</span>
+                {% endif %}
+            </div>
+
+            <!-- Quantity + Add to Cart -->
+            {% if product.stock_status == 'In Stock' %}
+            <div class="qty-row">
+                <div class="qty-control">
+                    <button class="qty-btn" id="qtyMinus" onclick="adjustQty(-1)">−</button>
+                    <input class="qty-input" type="number" id="qty" value="1" min="1" max="99" />
+                    <button class="qty-btn" id="qtyPlus" onclick="adjustQty(1)">+</button>
+                </div>
+                <button class="btn-add-cart" id="addToCartBtn" onclick="addToCart()">
+                    🛒 Add to Cart
+                </button>
+            </div>
+            <button class="btn-buy-now" id="buyNowBtn" onclick="buyNow()">
+                ⚡ Buy Now
+            </button>
+            {% else %}
+            <button class="btn-add-cart" disabled style="width:100%;margin-bottom:1rem;">
+                Out of Stock
+            </button>
+            {% endif %}
+
+            <!-- Trust Badges -->
+            <div class="trust-badges">
+                <div class="trust-item"><span class="trust-icon">🚚</span> Free delivery in Dhaka</div>
+                <div class="trust-item"><span class="trust-icon">🔄</span> 7-day returns</div>
+                <div class="trust-item"><span class="trust-icon">🔒</span> Secure payment</div>
+                <div class="trust-item"><span class="trust-icon">✅</span> 100% authentic</div>
+            </div>
+
+            <!-- Tabs: Description / How To Use -->
+            {% if product.description %}
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab(event,'tab-desc')">Description</button>
+                <button class="tab-btn" onclick="switchTab(event,'tab-howto')">How to Use</button>
+            </div>
+            <div id="tab-desc" class="tab-panel active">
+                {{ product.description|safe }}
+            </div>
+            <div id="tab-howto" class="tab-panel">
+                <p>Please refer to the product label for detailed usage instructions.</p>
+            </div>
+            {% endif %}
+        </div>
+    </main>
+
+    <!-- Related Products -->
+    {% if related_products %}
+    <section class="related-section">
+        <h2>You May Also Like</h2>
+        <div class="related-grid">
+            {% for rp in related_products %}
+            <a href="/product/{{ rp.slug }}" class="related-card">
+                <img src="{{ rp.image or 'https://placehold.co/400x300?text=No+Image' }}"
+                     alt="{{ rp.title }}" loading="lazy" />
+                <div class="related-card-body">
+                    <div class="related-card-title">{{ rp.title }}</div>
+                    <div class="related-card-price">
+                        {% if rp.discount_price and rp.discount_price < rp.price %}
+                        ৳{{ "{:,.0f}".format(rp.discount_price) }}
+                        <del>৳{{ "{:,.0f}".format(rp.price) }}</del>
+                        {% else %}
+                        ৳{{ "{:,.0f}".format(rp.price) }}
+                        {% endif %}
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+    {% include "templates/footer.html" %}
+
+    <!-- Toast -->
+    <div id="toast"></div>
+
+    <script>
+        const PRODUCT_NAME = "{{ product.name|escapejs }}";
+
+        /* ─── Gallery ─── */
+        function switchImage(thumb, src, alt) {
+            document.getElementById('mainImg').src = src;
+            document.getElementById('mainImg').alt = alt;
+            document.querySelectorAll('.gallery-thumbs img').forEach(t => t.classList.remove('active'));
+            thumb.classList.add('active');
+        }
+
+        /* ─── Qty ─── */
+        function adjustQty(delta) {
+            const input = document.getElementById('qty');
+            let val = parseInt(input.value, 10) + delta;
+            if (isNaN(val) || val < 1) val = 1;
+            if (val > 99) val = 99;
+            input.value = val;
+        }
+
+        /* ─── Toast ─── */
+        function showToast(msg, type) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.className = 'show ' + (type || '');
+            setTimeout(() => { t.className = ''; }, 2800);
+        }
+
+        /* ─── Add to Cart ─── */
+        function addToCart() {
+            const qty = parseInt(document.getElementById('qty')?.value || '1', 10);
+            frappe.call({
+                method: 'coscore.api.orders.add_to_cart',
+                args: { product: PRODUCT_NAME, quantity: qty },
+                callback: function(r) {
+                    if (r.message && r.message.status === 'success') {
+                        showToast('✓ Added to cart!', 'success');
+                        updateCartCount();
+                    } else {
+                        showToast(r.message?.message || 'Could not add to cart.', 'error');
+                    }
+                }
+            });
+        }
+
+        /* ─── Buy Now ─── */
+        function buyNow() {
+            const qty = parseInt(document.getElementById('qty')?.value || '1', 10);
+            frappe.call({
+                method: 'coscore.api.orders.add_to_cart',
+                args: { product: PRODUCT_NAME, quantity: qty },
+                callback: function(r) {
+                    if (r.message && r.message.status === 'success') {
+                        window.location.href = '/checkout';
+                    } else {
+                        showToast(r.message?.message || 'Could not proceed.', 'error');
+                    }
+                }
+            });
+        }
+
+        /* ─── Cart count (optional badge update in header) ─── */
+        function updateCartCount() {
+            frappe.call({
+                method: 'coscore.api.orders.get_cart_count',
+                callback: function(r) {
+                    const badge = document.getElementById('cart-count');
+                    if (badge && r.message != null) badge.textContent = r.message;
+                }
+            });
+        }
+
+        /* ─── Tabs ─── */
+        function switchTab(e, tabId) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            e.currentTarget.classList.add('active');
+            document.getElementById(tabId)?.classList.add('active');
+        }
+    </script>
+</body>
+</html>

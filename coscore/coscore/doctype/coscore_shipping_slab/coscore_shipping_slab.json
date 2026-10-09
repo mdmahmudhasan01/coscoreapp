@@ -1,0 +1,44 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "allow_rename": 1,
+ "creation": "2026-07-31 23:48:45.737149",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "up_to_weight",
+  "additional_charge"
+ ],
+ "fields": [
+  {
+   "fieldname": "up_to_weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Up to Weight (kg)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "additional_charge",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Additional Charge",
+   "reqd": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-07-31 23:48:45.737149",
+ "modified_by": "Administrator",
+ "module": "Coscore",
+ "name": "Coscore Shipping Slab",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

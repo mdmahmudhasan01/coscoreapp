@@ -1,0 +1,106 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "allow_rename": 1,
+ "autoname": "field:shipping_rule_name",
+ "creation": "2026-07-31 23:48:47.035956",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "shipping_rule_name",
+  "thana",
+  "zone_type",
+  "base_charge",
+  "cod_extra_charge",
+  "is_active",
+  "slabs"
+ ],
+ "fields": [
+  {
+   "fieldname": "shipping_rule_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Rule Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "thana",
+   "fieldtype": "Link",
+   "label": "Thana",
+   "options": "Coscore Thana"
+  },
+  {
+   "fieldname": "zone_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Zone Type",
+   "options": "Dhaka Metro\nOutside Dhaka\nSub-Metro"
+  },
+  {
+   "fieldname": "base_charge",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Base Charge"
+  },
+  {
+   "default": "0.0",
+   "fieldname": "cod_extra_charge",
+   "fieldtype": "Currency",
+   "label": "COD Extra Charge"
+  },
+  {
+   "default": "1",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Is Active"
+  },
+  {
+   "fieldname": "slabs",
+   "fieldtype": "Table",
+   "label": "Weight Slabs",
+   "options": "Coscore Shipping Slab"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-07-31 23:48:47.035956",
+ "modified_by": "Administrator",
+ "module": "Coscore",
+ "name": "Coscore Shipping Rule",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Coscore Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

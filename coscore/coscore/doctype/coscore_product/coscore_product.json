@@ -1,0 +1,185 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "allow_rename": 1,
+ "autoname": "field:slug",
+ "creation": "2026-07-31 23:48:46.191910",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "title",
+  "slug",
+  "item",
+  "seo_title",
+  "seo_description",
+  "short_description",
+  "description",
+  "benefits",
+  "how_to_use",
+  "key_ingredients",
+  "skin_type",
+  "price",
+  "discount_price",
+  "stock_status",
+  "category",
+  "brand",
+  "is_featured",
+  "is_active",
+  "images"
+ ],
+ "fields": [
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Title",
+   "reqd": 1
+  },
+  {
+   "fieldname": "slug",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Slug",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "ERPNext Item",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "seo_title",
+   "fieldtype": "Data",
+   "label": "SEO Title"
+  },
+  {
+   "fieldname": "seo_description",
+   "fieldtype": "Small Text",
+   "label": "SEO Description"
+  },
+  {
+   "fieldname": "short_description",
+   "fieldtype": "Small Text",
+   "label": "Short Description"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text Editor",
+   "label": "Description"
+  },
+  {
+   "fieldname": "benefits",
+   "fieldtype": "Text Editor",
+   "label": "Benefits"
+  },
+  {
+   "fieldname": "how_to_use",
+   "fieldtype": "Text Editor",
+   "label": "How to Use"
+  },
+  {
+   "fieldname": "key_ingredients",
+   "fieldtype": "Text Editor",
+   "label": "Key Ingredients"
+  },
+  {
+   "fieldname": "skin_type",
+   "fieldtype": "Small Text",
+   "label": "Skin Type"
+  },
+  {
+   "fieldname": "brand",
+   "fieldtype": "Data",
+   "label": "Brand"
+  },
+  {
+   "fieldname": "price",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Price (BDT)"
+  },
+  {
+   "fieldname": "discount_price",
+   "fieldtype": "Currency",
+   "label": "Discount Price (BDT)"
+  },
+  {
+   "default": "In Stock",
+   "fieldname": "stock_status",
+   "fieldtype": "Select",
+   "label": "Stock Status",
+   "options": "In Stock\nOut of Stock"
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Category",
+   "options": "Coscore Product Category"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_featured",
+   "fieldtype": "Check",
+   "label": "Is Featured"
+  },
+  {
+   "default": "1",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Is Active"
+  },
+  {
+   "fieldname": "images",
+   "fieldtype": "Table",
+   "label": "Product Images",
+   "options": "Coscore Product Image"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-07-31 23:48:46.191910",
+ "modified_by": "Administrator",
+ "module": "Coscore",
+ "name": "Coscore Product",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Coscore Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "allow_import": 1
+}

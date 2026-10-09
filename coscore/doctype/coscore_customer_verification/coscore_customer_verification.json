@@ -1,0 +1,18 @@
+{
+  "doctype": "DocType",
+  "name": "Coscore Customer Verification",
+  "module": "coscore",
+  "custom": 0,
+  "istable": 0,
+  "fields": [
+    {"fieldname": "phone_number", "label": "Phone Number", "fieldtype": "Data", "reqd": 1},
+    {"fieldname": "is_valid", "label": "Is Valid", "fieldtype": "Check"},
+    {"fieldname": "verification_method", "label": "Verification Method", "fieldtype": "Select", "options": "OTP\nAPI"},
+    {"fieldname": "verified_at", "label": "Verified At", "fieldtype": "Datetime"},
+    {"fieldname": "notes", "label": "Notes", "fieldtype": "Small Text"}
+  ],
+  "permissions": [
+    {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1},
+    {"role": "Coscore Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1}
+  ]
+}

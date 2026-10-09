@@ -1,0 +1,401 @@
+{
+ "app": "coscore",
+ "charts": [
+  {
+   "chart_name": "Coscore Orders by Status",
+   "label": "Coscore Orders by Status"
+  }
+ ],
+ "content": "[{\"id\":\"nc_revenue\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Today's Revenue\",\"col\":3}},{\"id\":\"nc_orders\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Today's Orders\",\"col\":3}},{\"id\":\"nc_products\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Active Products\",\"col\":3}},{\"id\":\"nc_shipments\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Pending Shipments\",\"col\":3}},{\"id\":\"chart_orders\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Coscore Orders by Status\",\"col\":12}},{\"id\":\"spacer_1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"sc_new_product\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"New Product\",\"col\":3}},{\"id\":\"sc_new_applicant\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Job Applicants\",\"col\":3}},{\"id\":\"sc_sales_orders\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Orders\",\"col\":3}},{\"id\":\"sc_new_banner\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Homepage Banners\",\"col\":3}},{\"id\":\"spacer_2\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"card_catalog\",\"type\":\"card\",\"data\":{\"card_name\":\"Catalog & Storefront\",\"col\":4}},{\"id\":\"card_orders\",\"type\":\"card\",\"data\":{\"card_name\":\"Orders & Logistics\",\"col\":4}},{\"id\":\"card_recruitment\",\"type\":\"card\",\"data\":{\"card_name\":\"Recruitment & Careers\",\"col\":4}},{\"id\":\"card_payments\",\"type\":\"card\",\"data\":{\"card_name\":\"Payments & Config\",\"col\":4}},{\"id\":\"card_analytics\",\"type\":\"card\",\"data\":{\"card_name\":\"Marketing & Analytics\",\"col\":4}},{\"id\":\"card_customers\",\"type\":\"card\",\"data\":{\"card_name\":\"Customers & Users\",\"col\":4}}]",
+ "creation": "2026-08-01 03:00:00",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "retail",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "Coscore",
+ "links": [
+  {
+   "description": "Manage catalog, item groups, images, and homepage banners",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Catalog & Storefront",
+   "link_count": 7,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Coscore Products",
+   "link_count": 0,
+   "link_to": "Coscore Product",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Coscore Categories",
+   "link_count": 0,
+   "link_to": "Coscore Product Category",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "ERPNext Items",
+   "link_count": 0,
+   "link_to": "Item",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Item Groups",
+   "link_count": 0,
+   "link_to": "Item Group",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Product Images",
+   "link_count": 0,
+   "link_to": "Coscore Product Image",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Homepage Banners",
+   "link_count": 0,
+   "link_to": "Coscore Homepage Banner",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Homepage Sections",
+   "link_count": 0,
+   "link_to": "Coscore Homepage Section",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "description": "Manage sales orders, order tracking, and courier delivery settings",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Orders & Logistics",
+   "link_count": 8,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Sales Orders",
+   "link_count": 0,
+   "link_to": "Sales Order",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Order Tracking",
+   "link_count": 0,
+   "link_to": "Coscore Order Tracking",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Tracking History",
+   "link_count": 0,
+   "link_to": "Coscore Order Tracking History",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Courier Settings",
+   "link_count": 0,
+   "link_to": "Coscore Courier Setting",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Districts",
+   "link_count": 0,
+   "link_to": "Coscore District",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Thanas",
+   "link_count": 0,
+   "link_to": "Coscore Thana",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Shipping Rules",
+   "link_count": 0,
+   "link_to": "Coscore Shipping Rule",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Shipping Charge Slabs",
+   "link_count": 0,
+   "link_to": "Coscore Shipping Charge Slab",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "description": "Recruitment, job circulars, and candidate applications",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Recruitment & Careers",
+   "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Job Applicants",
+   "link_count": 0,
+   "link_to": "Coscore Job Applicant",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "description": "Payment gateways, payment logs, and SEO settings",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Payments & Config",
+   "link_count": 3,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Payment Gateways",
+   "link_count": 0,
+   "link_to": "Coscore Payment Gateway Setting",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Payment Logs",
+   "link_count": 0,
+   "link_to": "Coscore Payment Log",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "SEO Settings",
+   "link_count": 0,
+   "link_to": "Coscore SEO Setting",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "description": "Marketing performance, event tracking, and ad insights",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Marketing & Analytics",
+   "link_count": 3,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Ad Performance",
+   "link_count": 0,
+   "link_to": "Coscore Ad Performance",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Ad Insight Logs",
+   "link_count": 0,
+   "link_to": "Coscore Ad Insight Log",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Ad Tracking Events",
+   "link_count": 0,
+   "link_to": "Coscore Ad Tracking Event",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "description": "Customer accounts and identity verification",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Customers & Users",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Customers",
+   "link_count": 0,
+   "link_to": "Customer",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Customer Verifications",
+   "link_count": 0,
+   "link_to": "Coscore Customer Verification",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-08-21 06:00:00",
+ "modified_by": "Administrator",
+ "module": "Coscore",
+ "name": "Coscore",
+ "number_cards": [
+  {
+   "label": "Today's Revenue",
+   "number_card_name": "Today's Revenue"
+  },
+  {
+   "label": "Today's Orders",
+   "number_card_name": "Today's Orders"
+  },
+  {
+   "label": "Active Products",
+   "number_card_name": "Active Products"
+  },
+  {
+   "label": "Pending Shipments",
+   "number_card_name": "Pending Shipments"
+  }
+ ],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "restrict_to_domain": "",
+ "roles": [
+  {
+   "role": "Administrator"
+  },
+  {
+   "role": "Coscore Manager"
+  },
+  {
+   "role": "System Manager"
+  }
+ ],
+ "sequence_id": 20.0,
+ "shortcuts": [
+  {
+   "color": "#449CF0",
+   "doc_view": "List",
+   "icon": "box",
+   "label": "Coscore Products",
+   "link_to": "Coscore Product",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "#29CD42",
+   "doc_view": "List",
+   "icon": "users",
+   "label": "Job Applicants",
+   "link_to": "Coscore Job Applicant",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "#EC864B",
+   "doc_view": "List",
+   "icon": "shopping-bag",
+   "label": "Sales Orders",
+   "link_to": "Sales Order",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "#9867E0",
+   "doc_view": "List",
+   "icon": "image",
+   "label": "Homepage Banners",
+   "link_to": "Coscore Homepage Banner",
+   "stats_filter": "[]",
+   "type": "DocType"
+  }
+ ],
+ "title": "Coscore",
+ "type": "Workspace"
+}

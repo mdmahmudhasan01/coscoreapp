@@ -1,0 +1,19 @@
+{
+  "doctype": "DocType",
+  "name": "Coscore Product Category",
+  "module": "coscore",
+  "custom": 0,
+  "istable": 0,
+  "fields": [
+    {"fieldname": "category_name", "label": "Category Name", "fieldtype": "Data", "reqd": 1},
+    {"fieldname": "slug", "label": "Slug", "fieldtype": "Data", "unique": 1, "reqd": 1},
+    {"fieldname": "item_group", "label": "ERPNext Item Group", "fieldtype": "Link", "options": "Item Group"},
+    {"fieldname": "banner_image", "label": "Banner Image", "fieldtype": "Image"},
+    {"fieldname": "parent_category", "label": "Parent Category", "fieldtype": "Link", "options": "Coscore Product Category"},
+    {"fieldname": "is_active", "label": "Active", "fieldtype": "Check", "default": 1}
+  ],
+  "permissions": [
+    {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1},
+    {"role": "Coscore Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1}
+  ]
+}

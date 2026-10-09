@@ -1,0 +1,16 @@
+{
+  "doctype": "DocType",
+  "name": "Coscore Order Tracking History",
+  "module": "coscore",
+  "custom": 0,
+  "istable": 1,
+  "fields": [
+    {"fieldname": "timestamp", "label": "Timestamp", "fieldtype": "Datetime", "reqd": 1},
+    {"fieldname": "status", "label": "Status", "fieldtype": "Data", "reqd": 1},
+    {"fieldname": "remarks", "label": "Remarks", "fieldtype": "Small Text"}
+  ],
+  "permissions": [
+    {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1},
+    {"role": "Coscore Manager", "read": 1, "write": 1, "create": 1, "delete": 1}
+  ]
+}

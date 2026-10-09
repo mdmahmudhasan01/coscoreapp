@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% if seo.site_title_template %}{{ seo.site_title_template|replace('{title}', 'Checkout') }}{% else %}Checkout{% endif %}</title>
+    {% if seo.default_meta_description %}<meta name="description" content="{{ seo.default_meta_description }}" />{% endif %}
+    <link rel="canonical" href="{{ frappe.utils.get_url('/checkout') }}" />
+    <link rel="stylesheet" href="/assets/coscore/css/style.css" />
+    <style>
+        .checkout-section {margin:2rem 0;}
+        .address-form, .payment-form {margin-bottom:2rem;}
+        .form-field {margin-bottom:1rem;}
+        label {display:block;font-weight:600;margin-bottom:.3rem;}
+        input, select {width:100%;padding:.5rem;border:1px solid #ccc;border-radius:4px;}
+        .place-order {background:#4caf50;color:#fff;padding:.75rem 1.5rem;border:none;border-radius:4px;cursor:pointer;transition:background .3s;}
+        .place-order:hover {background:#388e3c;}
+    </style>
+</head>
+<body>
+    {% include "templates/header.html" %}
+    <section class="checkout-page">
+        <h1>Checkout</h1>
+        {% if empty_cart %}
+            <p>Your cart is empty. <a href="/shop">Continue shopping</a></p>
+        {% else %}
+            <div class="checkout-section address-form">
+                <h2>Shipping Address</h2>
+                <form id="address-form">
+                    <div class="form-field">
+                        <label for="district">District</label>
+                        <select id="district" name="district">
+                            <option value="">Select District</option>
+                            {% for d in districts %}
+                                <option value="{{ d.name }}" {% if address.district == d.name %}selected{% endif %}>{{ d.district_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label for="thana">Thana</label>
+                        <select id="thana" name="thana"></select>
+                    </div>
+                    <div class="form-field">
+                        <label for="address_line">Address Line</label>
+                        <input type="text" id="address_line" name="address_line" value="{{ address.address_line or '' }}" />
+                    </div>
+                    <div class="form-field">
+                        <label for="postal_code">Postal Code</label>
+                        <select id="postal_code" name="postal_code">
+                            <option value="">Select Postal Code</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="checkout-section payment-form">
+                <h2>Payment Method</h2>
+                {% for gw in payment_gateways %}
+                    <div class="form-field">
+                        <input type="radio" id="gw_{{ gw.name }}" name="payment_gateway" value="{{ gw.name }}" {% if loop.first %}checked{% endif %} />
+                        <label for="gw_{{ gw.name }}">
+                            {% if gw.logo %}<img src="{{ gw.logo }}" alt="{{ gw.gateway_title }}" style="height:24px;vertical-align:middle;" />{% endif %} {{ gw.gateway_title }}
+                        </label>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="checkout-section order-summary">
+                <h2>Order Summary</h2>
+                <p>Subtotal: {{ subtotal | fmt_money }}</p>
+                <p id="shipping-charge">Shipping: Calculating...</p>
+                <p>Total: <span id="total-amount">{{ total | fmt_money }}</span></p>
+                <button class="place-order" onclick="placeOrder()">Place Order</button>
+            </div>
+        {% endif %}
+    </section>
+    {% include "templates/footer.html" %}
+    <script>
+        // Populate Thana dropdown when district changes
+        document.getElementById('district')?.addEventListener('change', function(){
+            const district = this.value;
+            const thanaSelect = document.getElementById('thana');
+            const pcSelect = document.getElementById('postal_code');
+            pcSelect.innerHTML = '<option value="">Select Postal Code</option>';
+            if(!district) { thanaSelect.innerHTML = '<option value="">Select Thana</option>'; return; }
+            frappe.call({
+                method: 'coscore.api.shipping.get_thanas',
+                args: {district: district},
+                callback: function(r){
+                    thanaSelect.innerHTML = '<option value="">Select Thana</option>';
+                    if(r.message && r.message.status === 'success'){
+                        r.message.data.forEach(t => {
+                            const opt = document.createElement('option');
+                            opt.value = t.name;
+                            opt.textContent = t.thana_name;
+                            thanaSelect.appendChild(opt);
+                        });
+                    }
+                }
+            });
+            calculateShipping();
+        });
+
+        // Populate Postal Code dropdown when thana changes
+        document.getElementById('thana')?.addEventListener('change', function(){
+            const thana = this.value;
+            const district = document.getElementById('district').value;
+            const pcSelect = document.getElementById('postal_code');
+            pcSelect.innerHTML = '<option value="">Select Postal Code</option>';
+            if(thana) {
+                frappe.call({
+                    method: 'coscore.api.shipping.get_postal_codes',
+                    args: {thana: thana, district: district},
+                    callback: function(r){
+                        if(r.message && r.message.status === 'success'){
+                            r.message.data.forEach(p => {
+                                const opt = document.createElement('option');
+                                opt.value = p.postal_code;
+                                opt.textContent = p.post_office ? `${p.postal_code} - ${p.post_office}` : p.postal_code;
+                                pcSelect.appendChild(opt);
+                            });
+                        }
+                    }
+                });
+            }
+            calculateShipping();
+        });
+
+        // Calculate shipping when district or thana changes
+        function calculateShipping(){
+            const thana = document.getElementById('thana')?.value;
+            const district = document.getElementById('district')?.value;
+            if(!thana && !district) return;
+            frappe.call({
+                method: 'coscore.api.shipping.calculate_shipping_charge',
+                args: {thana: thana, district: district, weight: 1.0, is_cod: false},
+                callback: function(r){
+                    if(r.message && r.message.status === 'success'){
+                        const charge = r.message.charge;
+                        document.getElementById('shipping-charge').textContent = `Shipping: ${frappe.format(charge, {type:'Currency'})}`;
+                        const subtotal = parseFloat('{{ subtotal }}');
+                        const total = subtotal + charge;
+                        document.getElementById('total-amount').textContent = frappe.format(total, {type:'Currency'});
+                    }
+                }
+            });
+        }
+        // If address already has thana, trigger calculation
+        {% if address.thana %}
+            document.addEventListener('DOMContentLoaded', function(){
+                document.getElementById('thana').value = '{{ address.thana }}';
+                calculateShipping();
+            });
+        {% endif %}
+        function placeOrder(){
+            const form = document.getElementById('address-form');
+            const fd = new FormData(form);
+            fd.append('payment_gateway', document.querySelector('input[name="payment_gateway"]:checked').value);
+            // Call a backend method to create Sales Invoice (to be implemented later)
+            frappe.call({
+                method: 'coscore.api.checkout.create_order',
+                args: Object.fromEntries(fd.entries()),
+                freeze: true,
+                callback: function(r){
+                    if(r.message && r.message.status === 'success'){
+                        window.location.href = '/thank-you?order=' + r.message.order_name;
+                    } else {
+                        frappe.msgprint(r.message.message || 'Failed to place order');
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

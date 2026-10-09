@@ -1,0 +1,19 @@
+{
+  "doctype": "DocType",
+  "name": "Coscore Courier Setting",
+  "module": "coscore",
+  "custom": 0,
+  "istable": 0,
+  "fields": [
+    {"fieldname": "courier_name", "label": "Courier Name", "fieldtype": "Data", "reqd": 1},
+    {"fieldname": "api_key", "label": "API Key", "fieldtype": "Password", "reqd": 1},
+    {"fieldname": "secret_key", "label": "Secret Key", "fieldtype": "Password", "reqd": 1},
+    {"fieldname": "base_url", "label": "Base URL", "fieldtype": "Data", "reqd": 1},
+    {"fieldname": "is_active", "label": "Active", "fieldtype": "Check", "default": 1},
+    {"fieldname": "is_default", "label": "Default", "fieldtype": "Check", "default": 0}
+  ],
+  "permissions": [
+    {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1},
+    {"role": "Coscore Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1}
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "doctype": "DocType",
+  "name": "Coscore Homepage Section",
+  "module": "coscore",
+  "custom": 0,
+  "istable": 0,
+  "fields": [
+    {"fieldname": "section_type", "label": "Section Type", "fieldtype": "Select", "options": "Featured Products\nCategory Grid\nBanner\nCustom HTML", "reqd": 1},
+    {"fieldname": "sort_order", "label": "Sort Order", "fieldtype": "Int", "default": 0},
+    {"fieldname": "is_active", "label": "Active", "fieldtype": "Check", "default": 1},
+    {"fieldname": "valid_from", "label": "Valid From", "fieldtype": "Date"},
+    {"fieldname": "valid_to", "label": "Valid To", "fieldtype": "Date"},
+    {"fieldname": "custom_html", "label": "Custom HTML", "fieldtype": "Text", "depends_on": "eval:doc.section_type=='Custom HTML'"}
+  ],
+  "permissions": [
+    {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1},
+    {"role": "Coscore Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1}
+  ]
+}

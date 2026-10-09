@@ -1,0 +1,21 @@
+{
+  "doctype": "DocType",
+  "name": "Coscore Homepage Banner",
+  "module": "coscore",
+  "custom": 0,
+  "istable": 0,
+  "fields": [
+    {"fieldname": "image", "label": "Image", "fieldtype": "Image", "reqd": 1},
+    {"fieldname": "title", "label": "Title", "fieldtype": "Data"},
+    {"fieldname": "subtitle", "label": "Subtitle", "fieldtype": "Small Text"},
+    {"fieldname": "cta_link", "label": "CTA Link", "fieldtype": "Data"},
+    {"fieldname": "sort_order", "label": "Sort Order", "fieldtype": "Int", "default": 0},
+    {"fieldname": "is_active", "label": "Active", "fieldtype": "Check", "default": 1},
+    {"fieldname": "valid_from", "label": "Valid From", "fieldtype": "Date"},
+    {"fieldname": "valid_to", "label": "Valid To", "fieldtype": "Date"}
+  ],
+  "permissions": [
+    {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1},
+    {"role": "Coscore Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1}
+  ]
+}

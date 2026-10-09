@@ -1,0 +1,9 @@
+# Robots.txt for Lookzene (https://lookzene.com)
+User-agent: *
+Allow: /
+Disallow: /checkout
+Disallow: /cart
+Disallow: /account
+Disallow: /api/
+
+Sitemap: https://lookzene.com/sitemap.xml

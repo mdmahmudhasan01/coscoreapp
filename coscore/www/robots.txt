@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /checkout
+Disallow: /thank-you
+Allow: /
+Sitemap: {{ frappe.utils.get_url('/sitemap.xml') }}

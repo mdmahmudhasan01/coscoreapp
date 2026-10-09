@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% if seo.site_title_template %}{{ seo.site_title_template|replace('{title}', 'Thank You') }}{% else %}Thank You{% endif %}</title>
+    {% if seo.default_meta_description %}<meta name="description" content="{{ seo.default_meta_description }}" />{% endif %}
+    <link rel="canonical" href="{{ frappe.utils.get_url('/thank-you') }}" />
+    <link rel="stylesheet" href="/assets/coscore/css/style.css" />
+    <style>
+        .summary {margin:2rem 0;}
+        .item {display:flex;align-items:center;margin-bottom:1rem;}
+        .item img {width:80px;height:80px;object-fit:cover;margin-right:1rem;}
+    </style>
+</head>
+<body>
+    {% include "templates/header.html" %}
+    <section class="thank-you-page">
+        <h1>Thank You for Your Order!</h1>
+        <p>Your order <strong>{{ invoice.name }}</strong> has been placed successfully.</p>
+        <div class="summary">
+            <p>Status: {{ invoice.status }}</p>
+            <p>Date: {{ invoice.posting_date }}</p>
+            <p>Total: {{ invoice.grand_total | fmt_money }}</p>
+            <p>Currency: {{ invoice.currency }}</p>
+        </div>
+        <h2>Order Items</h2>
+        {% for item in invoice.items %}
+            <div class="item">
+                <img src="{{ item.image }}" alt="{{ item.item_name|e }}" loading="lazy" />
+                <div>
+                    <p>{{ item.item_name }}</p>
+                    <p>Qty: {{ item.qty }} | Rate: {{ item.rate | fmt_money }} | Amount: {{ item.amount | fmt_money }}</p>
+                </div>
+            </div>
+        {% endfor %}
+        <p>We have sent a confirmation email to your registered email address.</p>
+        <p><a href="/shop">Continue Shopping</a></p>
+    </section>
+    {% include "templates/footer.html" %}
+</body>
+</html>

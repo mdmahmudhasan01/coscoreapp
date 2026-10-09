@@ -1,0 +1,16 @@
+{
+  "doctype": "DocType",
+  "name": "Coscore Product Image",
+  "module": "coscore",
+  "custom": 0,
+  "istable": 1,
+  "fields": [
+    {"fieldname": "image", "label": "Image", "fieldtype": "Image", "reqd": 1},
+    {"fieldname": "alt_text", "label": "Alt Text", "fieldtype": "Data"},
+    {"fieldname": "is_featured", "label": "Featured", "fieldtype": "Check"}
+  ],
+  "permissions": [
+    {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1},
+    {"role": "Coscore Manager", "read": 1, "write": 1, "create": 1, "delete": 1}
+  ]
+}

@@ -1,0 +1,17 @@
+[
+  {
+    "doctype": "Custom Field",
+    "name": "Sales Invoice-steadfast_tracking_number",
+    "dt": "Sales Invoice",
+    "fieldname": "steadfast_tracking_number",
+    "fieldtype": "Data",
+    "label": "Steadfast Tracking Number",
+    "insert_after": "customer",
+    "read_only": 1,
+    "description": "Tracking number returned by Steadfast courier after shipment creation.",
+    "permlevel": 0,
+    "hidden": 0,
+    "in_list_view": 1,
+    "default": ""
+  }
+]

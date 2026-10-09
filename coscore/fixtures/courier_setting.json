@@ -1,0 +1,14 @@
+[
+  {
+    "doctype": "Coscore Courier Setting",
+    "name": "Steadfast",
+    "courier_name": "Steadfast",
+    "is_active": 1,
+    "is_default": 1,
+    "base_url": "https://sandbox.steadfast.com.bd/t/api/v1",
+    "api_key": "YOUR_API_KEY",
+    "secret_key": "YOUR_SECRET_KEY",
+    "description": "Steadfast courier integration placeholder. Replace API keys with real credentials."
+  }
+]
+

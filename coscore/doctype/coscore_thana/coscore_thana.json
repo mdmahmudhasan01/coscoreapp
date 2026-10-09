@@ -1,0 +1,19 @@
+{
+  "doctype": "DocType",
+  "name": "Coscore Thana",
+  "module": "coscore",
+  "custom": 0,
+  "istable": 0,
+  "fields": [
+    {"fieldname": "district", "label": "District", "fieldtype": "Link", "options": "Coscore District", "reqd": 1},
+    {"fieldname": "thana_name", "label": "Thana Name", "fieldtype": "Data", "reqd": 1},
+    {"fieldname": "delivery_charge_city", "label": "Delivery Charge (City)", "fieldtype": "Currency"},
+    {"fieldname": "delivery_charge_outside_city", "label": "Delivery Charge (Outside City)", "fieldtype": "Currency"},
+    {"fieldname": "delivery_charge_sub_city", "label": "Delivery Charge (Sub‑City)", "fieldtype": "Currency"},
+    {"fieldname": "is_active", "label": "Active", "fieldtype": "Check", "default": 1}
+  ],
+  "permissions": [
+    {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1},
+    {"role": "Coscore Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1}
+  ]
+}

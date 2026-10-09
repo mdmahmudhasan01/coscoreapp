@@ -1,0 +1,106 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "allow_rename": 1,
+ "autoname": "hash",
+ "creation": "2026-07-31 23:48:46.395611",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "image",
+  "title",
+  "subtitle",
+  "cta_link",
+  "sort_order",
+  "is_active",
+  "valid_from",
+  "valid_to"
+ ],
+ "fields": [
+  {
+   "fieldname": "image",
+   "fieldtype": "Attach Image",
+   "label": "Image",
+   "reqd": 1
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Title"
+  },
+  {
+   "fieldname": "subtitle",
+   "fieldtype": "Data",
+   "label": "Subtitle"
+  },
+  {
+   "fieldname": "cta_link",
+   "fieldtype": "Data",
+   "label": "CTA Link"
+  },
+  {
+   "fieldname": "sort_order",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Sort Order"
+  },
+  {
+   "default": "1",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Is Active"
+  },
+  {
+   "fieldname": "valid_from",
+   "fieldtype": "Datetime",
+   "label": "Valid From"
+  },
+  {
+   "fieldname": "valid_to",
+   "fieldtype": "Datetime",
+   "label": "Valid To"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-07-31 23:48:46.395611",
+ "modified_by": "Administrator",
+ "module": "Coscore",
+ "name": "Coscore Homepage Banner",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Coscore Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

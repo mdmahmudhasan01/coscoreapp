@@ -1,0 +1,27 @@
+{
+  "doctype": "DocType",
+  "name": "Coscore Product",
+  "module": "coscore",
+  "custom": 0,
+  "istable": 0,
+  "fields": [
+    {"fieldname": "title", "label": "Title", "fieldtype": "Data", "reqd": 1},
+    {"fieldname": "slug", "label": "Slug", "fieldtype": "Data", "unique": 1, "reqd": 1},
+    {"fieldname": "seo_meta_title", "label": "SEO Meta Title", "fieldtype": "Data"},
+    {"fieldname": "seo_meta_description", "label": "SEO Meta Description", "fieldtype": "Text"},
+    {"fieldname": "short_description", "label": "Short Description", "fieldtype": "Small Text"},
+    {"fieldname": "long_description", "label": "Long Description", "fieldtype": "Text"},
+    {"fieldname": "price", "label": "Price", "fieldtype": "Currency", "reqd": 1},
+    {"fieldname": "discount_price", "label": "Discount Price", "fieldtype": "Currency"},
+    {"fieldname": "stock_status", "label": "Stock Status", "fieldtype": "Select", "options": "In Stock\nOut of Stock"},
+    {"fieldname": "category", "label": "Category", "fieldtype": "Link", "options": "Coscore Product Category"},
+    {"fieldname": "images", "label": "Images", "fieldtype": "Table", "options": "Coscore Product Image"},
+    {"fieldname": "is_featured", "label": "Featured", "fieldtype": "Check"},
+    {"fieldname": "is_active", "label": "Active", "fieldtype": "Check", "default": 1}
+  ],
+  "permissions": [
+    {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1},
+    {"role": "Coscore Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1}
+  ],
+  "list_view_fields": ["title", "category", "price", "is_active"]
+}

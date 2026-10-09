@@ -1,0 +1,17 @@
+{
+  "doctype": "DocType",
+  "name": "Coscore District",
+  "module": "coscore",
+  "custom": 0,
+  "istable": 0,
+  "fields": [
+    {"fieldname": "district_name", "label": "District Name", "fieldtype": "Data", "reqd": 1},
+    {"fieldname": "name_bn", "label": "Name (BN)", "fieldtype": "Data"},
+    {"fieldname": "name_en", "label": "Name (EN)", "fieldtype": "Data"},
+    {"fieldname": "is_active", "label": "Active", "fieldtype": "Check", "default": 1}
+  ],
+  "permissions": [
+    {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1},
+    {"role": "Coscore Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1}
+  ]
+}

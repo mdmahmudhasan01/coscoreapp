@@ -1,0 +1,54 @@
+/* Lookzene / Coscore Base Stylesheet */
+
+:root {
+  --primary-color: #e05c9a;
+  --primary-hover: #c2185b;
+  --secondary-color: #1a1a2e;
+  --background-color: #fafafa;
+  --text-color: #1a1a2e;
+  --text-muted: #555555;
+  --border-color: #e8e8e8;
+  --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Button Reset & Helpers */
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Layout Utilities */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}

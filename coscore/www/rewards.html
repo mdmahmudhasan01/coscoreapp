@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Coscore Loyalty Rewards Lookup</title>
+	<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--bg-color: #0b0c10;
+			--panel-bg: rgba(22, 26, 33, 0.85);
+			--accent: #a855f7;
+			--accent-hover: #9333ea;
+			--text-main: #f3f4f6;
+			--text-muted: #9ca3af;
+			--border: rgba(255, 255, 255, 0.08);
+		}
+
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			font-family: 'Plus Jakarta Sans', sans-serif;
+			background-color: var(--bg-color);
+			color: var(--text-main);
+			min-height: 100vh;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			padding: 2rem;
+			background-image: 
+				radial-gradient(at 0% 100%, rgba(168, 85, 247, 0.15) 0px, transparent 50%),
+				radial-gradient(at 100% 0%, rgba(99, 102, 241, 0.1) 0px, transparent 50%);
+		}
+
+		.container {
+			max-width: 500px;
+			width: 100%;
+			background: var(--panel-bg);
+			backdrop-filter: blur(16px);
+			border: 1px solid var(--border);
+			border-radius: 24px;
+			padding: 2.5rem;
+			box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+		}
+
+		.header {
+			text-align: center;
+			margin-bottom: 2rem;
+		}
+
+		.title {
+			font-size: 1.75rem;
+			font-weight: 700;
+			margin-bottom: 0.5rem;
+			background: linear-gradient(135deg, #f472b6 0%, #a855f7 100%);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+
+		.subtitle {
+			color: var(--text-muted);
+			font-size: 0.875rem;
+		}
+
+		.form-group {
+			margin-bottom: 1.5rem;
+		}
+
+		label {
+			display: block;
+			font-size: 0.875rem;
+			font-weight: 500;
+			margin-bottom: 0.5rem;
+			color: var(--text-muted);
+		}
+
+		input {
+			width: 100%;
+			background: rgba(255, 255, 255, 0.05);
+			border: 1px solid var(--border);
+			border-radius: 12px;
+			padding: 0.875rem 1rem;
+			color: var(--text-main);
+			font-family: inherit;
+			font-size: 1rem;
+			transition: all 0.2s ease;
+		}
+
+		input:focus {
+			outline: none;
+			border-color: var(--accent);
+			box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.2);
+			background: rgba(255, 255, 255, 0.08);
+		}
+
+		.btn {
+			width: 100%;
+			background: var(--accent);
+			color: #ffffff;
+			border: none;
+			border-radius: 12px;
+			padding: 1rem;
+			font-size: 1rem;
+			font-weight: 600;
+			cursor: pointer;
+			transition: all 0.2s ease;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 0.5rem;
+		}
+
+		.btn:hover {
+			background: var(--accent-hover);
+			transform: scale(1.01);
+		}
+
+		.result-box {
+			margin-top: 2rem;
+			padding: 1.5rem;
+			border-radius: 16px;
+			border: 1px solid var(--border);
+			background: rgba(255, 255, 255, 0.02);
+			display: none;
+			text-align: center;
+		}
+
+		.result-box.success {
+			border-color: rgba(168, 85, 247, 0.3);
+			background: rgba(168, 85, 247, 0.03);
+		}
+
+		.result-box.error {
+			border-color: rgba(239, 68, 68, 0.3);
+			background: rgba(239, 68, 68, 0.03);
+		}
+
+		.points-display {
+			font-size: 3rem;
+			font-weight: 800;
+			color: #ffffff;
+			margin: 0.5rem 0;
+			text-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+		}
+
+		.back-link {
+			display: block;
+			text-align: center;
+			margin-top: 1.5rem;
+			color: var(--text-muted);
+			font-size: 0.875rem;
+			text-decoration: none;
+			transition: color 0.2s ease;
+		}
+
+		.back-link:hover {
+			color: var(--accent);
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="header">
+			<h1 class="title">Rewards Lookup</h1>
+			<p class="subtitle">Enter your details to check your Coscore loyalty balance</p>
+		</div>
+		<form id="lookupForm">
+			<div class="form-group">
+				<label for="emailInput">Email Address</label>
+				<input type="email" id="emailInput" placeholder="name@example.com">
+			</div>
+			<div class="form-group" style="margin-bottom: 2rem;">
+				<label for="phoneInput">Phone Number (Optional)</label>
+				<input type="text" id="phoneInput" placeholder="+88017xxxxxxxx">
+			</div>
+			<button type="submit" class="btn">
+				Check Balance
+			</button>
+		</form>
+
+		<div id="resultBox" class="result-box">
+			<div id="resultTitle" style="font-weight: 600; font-size: 1rem; margin-bottom: 0.25rem;"></div>
+			<div id="resultMessage" style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1rem;"></div>
+			<div id="pointsLabel" style="font-size: 0.875rem; font-weight: 500; color: var(--text-muted);">Balance</div>
+			<div id="pointsValue" class="points-display">0</div>
+			<div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem;">Earned from Coscore Shopping</div>
+		</div>
+
+		<a href="/" class="back-link">&larr; Back to Portal Home</a>
+	</div>
+
+	<script>
+		document.getElementById('lookupForm').addEventListener('submit', async function(e) {
+			e.preventDefault();
+			const email = document.getElementById('emailInput').value.trim();
+			const phone = document.getElementById('phoneInput').value.trim();
+
+			const resultBox = document.getElementById('resultBox');
+			const resultTitle = document.getElementById('resultTitle');
+			const resultMessage = document.getElementById('resultMessage');
+			const pointsValue = document.getElementById('pointsValue');
+
+			resultBox.style.display = 'none';
+
+			if (!email && !phone) {
+				showResult('error', 'Fields Required', 'Please enter email address or phone number.', 0);
+				return;
+			}
+
+			try {
+				const url = `/api/method/coscore.api.rewards.get_points?email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}`;
+				const res = await fetch(url);
+				const data = await res.json();
+
+				if (data.message && data.message.status === 'success') {
+					showResult('success', 'Balance Found', `Customer: ${data.message.customer}`, data.message.points);
+				} else {
+					const msg = data.message ? data.message.message : 'No registered loyalty profile matched.';
+					showResult('error', 'Not Found', msg, 0);
+				}
+			} catch (err) {
+				showResult('error', 'Error Occurred', 'Failed to retrieve rewards balance. Make sure ERPNext is running.', 0);
+			}
+		});
+
+		function showResult(type, title, message, points) {
+			const resultBox = document.getElementById('resultBox');
+			const resultTitle = document.getElementById('resultTitle');
+			const resultMessage = document.getElementById('resultMessage');
+			const pointsValue = document.getElementById('pointsValue');
+
+			resultBox.className = `result-box ${type}`;
+			resultTitle.textContent = title;
+			resultMessage.textContent = message;
+			pointsValue.textContent = points;
+			resultBox.style.display = 'block';
+		}
+	</script>
+</body>
+</html>

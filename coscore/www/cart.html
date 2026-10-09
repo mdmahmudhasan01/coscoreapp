@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% if seo.site_title_template %}{{ seo.site_title_template|replace('{title}', 'Your Cart') }}{% else %}Cart{% endif %}</title>
+    {% if seo.default_meta_description %}<meta name="description" content="{{ seo.default_meta_description }}" />{% endif %}
+    <link rel="canonical" href="{{ frappe.utils.get_url('/cart') }}" />
+    <link rel="stylesheet" href="/assets/coscore/css/style.css" />
+    <style>
+        .cart-item {display:flex;align-items:center;margin-bottom:1rem;}
+        .cart-item img {width:80px;height:80px;object-fit:cover;margin-right:1rem;}
+        .cart-summary {font-size:1.2rem;margin-top:2rem;}
+        .checkout-btn {background:#ff5722;color:#fff;padding:.75rem 1.5rem;border:none;border-radius:4px;cursor:pointer;transition:background .3s;}
+        .checkout-btn:hover {background:#e64a19;}
+    </style>
+</head>
+<body>
+    {% include "templates/header.html" %}
+    <section class="cart-page">
+        <h1>Your Cart</h1>
+        {% if cart_items|length == 0 %}
+            <p>Your cart is empty. <a href="/shop">Continue shopping</a></p>
+        {% else %}
+            {% for item in cart_items %}
+                <div class="cart-item">
+                    <img src="{{ item.image }}" alt="{{ item.item_name|e }}" loading="lazy" />
+                    <div>
+                        <h4>{{ item.item_name }}</h4>
+                        <p>Qty: {{ item.quantity }}</p>
+                        <p>Price: {{ (item.discount_price or item.price) | fmt_money }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="cart-summary">
+                <p>Subtotal: {{ subtotal | fmt_money }}</p>
+                <p>Total (incl. shipping): {{ total | fmt_money }}</p>
+                <button class="checkout-btn" onclick="window.location.href='/checkout'">Proceed to Checkout</button>
+            </div>
+        {% endif %}
+    </section>
+    {% include "templates/footer.html" %}
+</body>
+</html>

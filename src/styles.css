@@ -1,0 +1,364 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Lookzene — Timeless Beauty design system
+ * Premium beauty/skincare tokens: blush, burgundy, gold, ivory.
+ * All colors in oklch. Fonts loaded via <link> in __root.tsx.
+ */
+
+@theme inline {
+  --font-serif: "Playfair Display", "Cormorant Garamond", serif;
+  --font-sans: "DM Sans", "Inter", system-ui, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+
+  --color-blush: var(--blush);
+  --color-blush-soft: var(--blush-soft);
+  --color-rose-gold: var(--rose-gold);
+  --color-burgundy: var(--burgundy);
+  --color-ivory: var(--ivory);
+  --color-gold: var(--gold);
+  --color-beige: var(--beige);
+  --color-emerald: var(--emerald);
+  --color-peach: var(--peach);
+  --color-mint: var(--mint);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 1rem;
+
+  /* Backgrounds */
+  --background: oklch(0.972 0.008 70);       /* #FAF7F2 warm ivory */
+  --foreground: oklch(0.22 0.01 20);         /* #2B2527 dark warm */
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.01 20);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.01 20);
+
+  /* Primary = Elegant Burgundy #9B2A4A */
+  --primary: oklch(0.44 0.14 8);
+  --primary-foreground: oklch(0.98 0.005 70);
+
+  /* Secondary = Warm Beige #EDE4D8 */
+  --secondary: oklch(0.92 0.015 75);
+  --secondary-foreground: oklch(0.22 0.01 20);
+
+  --muted: oklch(0.955 0.01 70);             /* #F9F5F0 */
+  --muted-foreground: oklch(0.5 0.015 20);   /* #71676A */
+
+  --accent: oklch(0.88 0.055 15);            /* soft blush accent */
+  --accent-foreground: oklch(0.22 0.01 20);
+
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.98 0.005 70);
+
+  --border: oklch(0.9 0.01 60);              /* #E9DFDA */
+  --input: oklch(0.9 0.01 60);
+  --ring: oklch(0.44 0.14 8);
+
+  /* Custom brand tokens */
+  --blush: oklch(0.86 0.065 15);             /* #F8C1C8 */
+  --blush-soft: oklch(0.9 0.045 25);         /* #F6D1C1 peach-blush */
+  --rose-gold: oklch(0.79 0.065 35);         /* #E8B4A0 */
+  --burgundy: oklch(0.44 0.14 8);            /* #9B2A4A */
+  --ivory: oklch(0.955 0.01 70);             /* #F9F5F0 */
+  --gold: oklch(0.78 0.055 75);              /* #D4AF88 */
+  --beige: oklch(0.9 0.02 75);               /* #EDE4D8 */
+  --emerald: oklch(0.58 0.09 165);           /* #2E8B6D */
+  --peach: oklch(0.9 0.045 25);              /* #F6D1C1 */
+  --mint: oklch(0.94 0.03 165);              /* #D9EFE6 */
+
+  /* Gradients */
+  --gradient-blush: linear-gradient(135deg, oklch(0.972 0.008 70) 0%, oklch(0.86 0.065 15) 100%);
+  --gradient-rose: linear-gradient(135deg, oklch(0.955 0.01 70) 0%, oklch(0.79 0.065 35) 100%);
+  --gradient-luxury: linear-gradient(135deg, oklch(0.972 0.008 70) 0%, oklch(0.9 0.02 75) 50%, oklch(0.86 0.065 15) 100%);
+  --gradient-hero: linear-gradient(135deg, oklch(0.955 0.01 70) 0%, oklch(0.9 0.045 25) 100%);
+
+  /* Shadows */
+  --shadow-soft: 0 4px 20px -8px oklch(0.44 0.14 8 / 0.08);
+  --shadow-card: 0 8px 30px -12px oklch(0.44 0.14 8 / 0.12);
+  --shadow-luxury: 0 20px 60px -20px oklch(0.44 0.14 8 / 0.18);
+
+  --sidebar: oklch(0.955 0.01 70);
+  --sidebar-foreground: oklch(0.22 0.01 20);
+  --sidebar-primary: oklch(0.44 0.14 8);
+  --sidebar-primary-foreground: oklch(0.98 0.005 70);
+  --sidebar-accent: oklch(0.88 0.055 15);
+  --sidebar-accent-foreground: oklch(0.22 0.01 20);
+  --sidebar-border: oklch(0.9 0.01 60);
+  --sidebar-ring: oklch(0.44 0.14 8);
+}
+
+.dark {
+  --background: oklch(0.19 0.005 20);
+  --foreground: oklch(0.955 0.01 70);
+  --card: oklch(0.23 0.008 20);
+  --card-foreground: oklch(0.955 0.01 70);
+  --popover: oklch(0.23 0.008 20);
+  --popover-foreground: oklch(0.955 0.01 70);
+  --primary: oklch(0.79 0.065 35);
+  --primary-foreground: oklch(0.19 0.005 20);
+  --secondary: oklch(0.28 0.01 20);
+  --secondary-foreground: oklch(0.955 0.01 70);
+  --muted: oklch(0.28 0.01 20);
+  --muted-foreground: oklch(0.72 0.01 30);
+  --accent: oklch(0.86 0.065 15);
+  --accent-foreground: oklch(0.19 0.005 20);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.79 0.065 35);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    touch-action: manipulation;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    max-width: 100vw;
+    width: 100%;
+  }
+
+  img, svg, video, canvas {
+    max-width: 100%;
+    height: auto;
+    content-visibility: auto;
+  }
+
+  /* Prevent auto-zoom on mobile Safari when tapping inputs */
+  @media (max-width: 639px) {
+    input:not([type="checkbox"]):not([type="radio"]),
+    select,
+    textarea {
+      font-size: 16px !important;
+    }
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-serif);
+    letter-spacing: -0.01em;
+    font-weight: 500;
+  }
+}
+
+/* Mobile drawer hardware acceleration */
+.mobile-drawer-gpu {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Touch-optimized horizontal scrolling carousels & chip bars */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Ultra-compact screen padding (<380px) */
+@media (max-width: 380px) {
+  .container-luxe {
+    padding-inline: 0.75rem !important;
+  }
+}
+
+@utility container-luxe {
+  width: 100%;
+  max-width: 1400px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+@utility gradient-blush-bg {
+  background: var(--gradient-blush);
+}
+
+@utility gradient-luxury-bg {
+  background: var(--gradient-luxury);
+}
+
+@utility gradient-hero-bg {
+  background: var(--gradient-hero);
+}
+
+@utility shadow-luxury {
+  box-shadow: var(--shadow-luxury);
+}
+
+@utility shadow-card {
+  box-shadow: var(--shadow-card);
+}
+
+@utility shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+
+@utility text-serif {
+  font-family: var(--font-serif);
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+@utility animate-float {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@utility animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+
+@keyframes cart-pop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.08); }
+  70%  { transform: scale(0.97); }
+  100% { transform: scale(1); }
+}
+@keyframes cart-badge {
+  0%   { transform: scale(1); }
+  30%  { transform: scale(1.4); background-color: hsl(var(--gold, 45 90% 60%)); }
+  100% { transform: scale(1); }
+}
+
+/* ─── Rich Content (Quill editor output from ERPNext) ────────────────── */
+.rich-content h1,
+.rich-content h2 {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+.rich-content h3 {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-top: 1rem;
+  margin-bottom: 0.4rem;
+}
+.rich-content p {
+  margin-bottom: 0.65rem;
+}
+.rich-content strong, .rich-content b {
+  font-weight: 700;
+  color: var(--foreground);
+}
+/* Quill outputs <li data-list="bullet"> inside <ul>, or bare <li> after stripping */
+.rich-content ul,
+.rich-content ol {
+  padding-left: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+.rich-content ul li {
+  list-style-type: disc;
+  margin-bottom: 0.35rem;
+}
+.rich-content ol li {
+  list-style-type: decimal;
+  margin-bottom: 0.35rem;
+}
+/* Quill bare <li> without wrapper — treat as bullet */
+.rich-content li {
+  margin-bottom: 0.35rem;
+}
+/* Tables from Quill */
+.rich-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+  font-size: 0.8125rem;
+}
+.rich-content th,
+.rich-content td {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+.rich-content tr:first-child td,
+.rich-content th {
+  background-color: var(--ivory, #faf8f5);
+  font-weight: 600;
+  color: var(--foreground);
+}
+.rich-content tr:nth-child(even) td {
+  background-color: var(--ivory, #faf8f5);
+}
+/* First h2 shouldn't have extra top margin */
+.rich-content > h2:first-child,
+.rich-content > h1:first-child {
+  margin-top: 0;
+}
