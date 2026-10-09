@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Prefer system redis-server (OS package). Not tied to any other project tree.
+set -euo pipefail
+if [[ -x /usr/bin/redis-server ]]; then
+  exec /usr/bin/redis-server "$@"
+fi
+echo "redis-server not found. Install OS package: sudo apt install redis-server" >&2
+exit 1

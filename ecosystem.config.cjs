@@ -1,75 +1,106 @@
+/**
+ * Standalone Lookzene stack — no other project directories required.
+ * Runtimes: ./runtime/python, ./runtime/node
+ * Control:  ./standalone.sh start|stop|restart|status
+ */
+const path = require('path');
+const ROOT = __dirname;
+
 module.exports = {
   apps: [
     {
       name: 'lookzene-redis-cache',
-      cwd: '/home/frappe/projects/lookzene',
-      script: '/usr/bin/redis-server',
-      args: '/home/frappe/projects/lookzene/config/redis_cache.conf',
+      cwd: ROOT,
+      script: path.join(ROOT, 'bin/redis-server'),
+      args: path.join(ROOT, 'config/redis_cache.conf'),
       interpreter: 'none',
       autorestart: true,
       max_restarts: 10,
       restart_delay: 2000,
-      out_file: '/home/frappe/projects/lookzene/logs/redis-cache.log',
-      error_file: '/home/frappe/projects/lookzene/logs/redis-cache.error.log'
+      out_file: path.join(ROOT, 'logs/redis-cache.log'),
+      error_file: path.join(ROOT, 'logs/redis-cache.error.log'),
     },
     {
       name: 'lookzene-redis-queue',
-      cwd: '/home/frappe/projects/lookzene',
-      script: '/usr/bin/redis-server',
-      args: '/home/frappe/projects/lookzene/config/redis_queue.conf',
+      cwd: ROOT,
+      script: path.join(ROOT, 'bin/redis-server'),
+      args: path.join(ROOT, 'config/redis_queue.conf'),
       interpreter: 'none',
       autorestart: true,
       max_restarts: 10,
       restart_delay: 2000,
-      out_file: '/home/frappe/projects/lookzene/logs/redis-queue.log',
-      error_file: '/home/frappe/projects/lookzene/logs/redis-queue.error.log'
+      out_file: path.join(ROOT, 'logs/redis-queue.log'),
+      error_file: path.join(ROOT, 'logs/redis-queue.error.log'),
     },
     {
       name: 'lookzene-web',
-      cwd: '/home/frappe/projects/lookzene/sites',
-      script: '/home/frappe/projects/lookzene/env/bin/gunicorn',
+      cwd: path.join(ROOT, 'sites'),
+      script: path.join(ROOT, 'env/bin/gunicorn'),
       args: '-b 127.0.0.1:8001 -w 5 --max-requests 5000 --max-requests-jitter 500 -t 120 --graceful-timeout 30 frappe_app:application --preload',
       interpreter: 'none',
       autorestart: true,
       max_restarts: 10,
       restart_delay: 2000,
-      out_file: '/home/frappe/projects/lookzene/logs/web.log',
-      error_file: '/home/frappe/projects/lookzene/logs/web.error.log'
+      out_file: path.join(ROOT, 'logs/web.log'),
+      error_file: path.join(ROOT, 'logs/web.error.log'),
     },
     {
       name: 'lookzene-schedule',
-      cwd: '/home/frappe/projects/lookzene',
-      script: '/home/frappe/.local/bin/bench',
+      cwd: ROOT,
+      script: path.join(ROOT, 'bin/bench'),
       args: 'schedule',
       interpreter: 'none',
       autorestart: true,
       max_restarts: 10,
       restart_delay: 5000,
-      out_file: '/home/frappe/projects/lookzene/logs/schedule.log',
-      error_file: '/home/frappe/projects/lookzene/logs/schedule.error.log'
+      out_file: path.join(ROOT, 'logs/schedule.log'),
+      error_file: path.join(ROOT, 'logs/schedule.error.log'),
     },
     {
       name: 'lookzene-worker',
-      cwd: '/home/frappe/projects/lookzene',
-      script: '/home/frappe/.local/bin/bench',
+      cwd: ROOT,
+      script: path.join(ROOT, 'bin/bench'),
       args: 'worker --queue short,default,long',
       interpreter: 'none',
       autorestart: true,
       max_restarts: 10,
       restart_delay: 5000,
-      out_file: '/home/frappe/projects/lookzene/logs/worker.log',
-      error_file: '/home/frappe/projects/lookzene/logs/worker.error.log'
+      out_file: path.join(ROOT, 'logs/worker.log'),
+      error_file: path.join(ROOT, 'logs/worker.error.log'),
     },
     {
       name: 'lookzene-socketio',
-      cwd: '/home/frappe/projects/lookzene',
-      script: 'apps/frappe/socketio.js',
-      interpreter: 'node',
+      cwd: ROOT,
+      script: path.join(ROOT, 'apps/frappe/socketio.js'),
+      interpreter: path.join(ROOT, 'runtime/node/bin/node'),
       autorestart: true,
       max_restarts: 10,
       restart_delay: 2000,
-      out_file: '/home/frappe/projects/lookzene/logs/node-socketio.log',
-      error_file: '/home/frappe/projects/lookzene/logs/node-socketio.error.log'
-    }
-  ]
+      out_file: path.join(ROOT, 'logs/node-socketio.log'),
+      error_file: path.join(ROOT, 'logs/node-socketio.error.log'),
+    },
+    {
+      name: 'lookzene-frontend',
+      cwd: path.join(ROOT, 'apps/coscore'),
+      script: './.output/server/index.mjs',
+      interpreter: path.join(ROOT, 'runtime/node/bin/node'),
+      exec_mode: 'cluster',
+      instances: 2,
+      autorestart: true,
+      max_restarts: 100,
+      min_uptime: '5s',
+      restart_delay: 500,
+      exp_backoff_restart_delay: 100,
+      out_file: path.join(ROOT, 'logs/frontend.log'),
+      error_file: path.join(ROOT, 'logs/frontend.error.log'),
+      env: {
+        PORT: 3002,
+        HOST: '0.0.0.0',
+        NITRO_HOST: '0.0.0.0',
+        NITRO_PORT: 3002,
+        VITE_COSCORE_API_URL: 'https://cp.lookzene.com/api/method/coscore.api',
+        PATH: `${path.join(ROOT, 'runtime/node/bin')}:${path.join(ROOT, 'bin')}:${process.env.PATH || ''}`,
+      },
+    },
+  ],
 };

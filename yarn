@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+ROOT="$(cd "$(dirname "$0")" && pwd)"
+export PATH="${ROOT}/runtime/node/bin:${ROOT}/bin:${PATH}"
+if command -v corepack >/dev/null 2>&1; then
+  exec corepack yarn "$@"
+fi
+if command -v yarn >/dev/null 2>&1 && [[ "$(command -v yarn)" != "$ROOT/yarn" ]]; then
+  exec yarn "$@"
+fi
+echo "yarn/corepack not available in PATH; use npm via runtime/node" >&2
+exit 1

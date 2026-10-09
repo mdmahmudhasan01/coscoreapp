@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# In-tree bench — no dependency on ~/.local/bin/bench or other projects.
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+export PATH="${ROOT}/runtime/node/bin:${ROOT}/bin:${ROOT}/env/bin:${PATH}"
+cd "${ROOT}/sites"
+if [[ "${1:-}" == "frappe" ]]; then
+  exec "${ROOT}/env/bin/python" -m frappe.utils.bench_helper "$@"
+fi
+exec "${ROOT}/env/bin/python" -m frappe.utils.bench_helper frappe "$@"
